@@ -1,0 +1,28 @@
+@charset "UTF-8";
+body{
+  background-image: url('uploads/images/back.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.wrapper {
+  padding: 3rem 1.5rem;
+  max-width: 1500px;
+  margin: 0 auto;
+  text-align: -webkit-center;
+}
+.wrapper .row{
+  text-align: center;
+}
+.card-body{
+  background-color: #b8b8e4;
+  color:#454658;
+}
+.blockBackgroundNewsletter{
+  background-color: #b8b8e4;
+}
+#sendNewsletter{
+  background-color: white;
+  border: 1px solid white;
+}
+
+

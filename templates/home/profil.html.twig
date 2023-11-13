@@ -1,0 +1,174 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+  
+{% block body %}
+
+<style>
+        :root {
+            --main-color: #76b947; /* Primary color from the navbar */
+            --text-color: #333; /* Text color for readability */
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Main font family */
+        }
+
+        /* Card styles */
+        
+        /* Heading styles */
+        .card h1 {
+            color: var(--main-color);
+            font-family: var(--font-family);
+        }
+
+        /* Body text styles */
+             .card , .card-body {
+            font-family: var(--font-family);
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            padding: 20px;
+            }
+        
+
+        /* Label and value styles */
+        .label, .value {
+            font-size: 18px;
+            color: var(--text-color);
+        }
+
+        /* Bold labels for a visual hierarchy */
+        .label {
+            font-weight: bold;
+        }
+
+        /* Consistent bottom margin for rows */
+        .row {
+            margin-bottom: 10px;
+        }
+
+        /* Custom horizontal rule to match the color theme */
+        hr {
+            border-top-color: var(--main-color);
+        }
+
+        /* Media queries for responsive adjustments */
+        @media (max-width: 768px) {
+            .label, .value {
+                font-size: 16px;
+            }
+        }
+    </style>
+<br><br>
+<br> <br> <br>
+
+<div class="app d-flex flex-row align-items-center">
+    <div class="container">
+        <div class="justify-content-center row">
+            <div class="col-md-8 col-lg-8 col-xl-8">
+                <div class="card border-primary mb-3" style="background-color: rgba(245, 245, 245, 0.9)">
+                    <div class="card-body" style="background-color: rgba(50, 205, 50, 0.3); border: 1px solid #4CAF50;">
+                       <center> <h1>Mon Profil</h1> </center>
+                        <hr />
+                       
+                            <div class="row">
+                              <div class="col-5">
+                                    <div class="input-group">
+                                 <b>     <label style="font-size:18px">Prénom :<label></b>
+                                    </div>
+                               </div>
+                               <div class="col-7">
+                                <div class="input-group">
+                                    <label style="font-size:18px">{{app.user.surname}}<label>
+                                </div>
+                               </div>
+                            </div>
+<br>
+                          <div class="row">
+                              <div class="col-5">
+                                    <div class="input-group">
+                                <b>      <label style="font-size:18px">Nom :<label></b>
+                                    </div>
+                               </div>
+                               <div class="col-7">
+                                <div class="input-group">
+                                    <label style="font-size:18px">{{app.user.name}}<label>
+                                </div>
+                               </div>
+                            </div>
+
+                            <br>
+                          <div class="row">
+                              <div class="col-5">
+                                    <div class="input-group">
+                                <b>  <label style="font-size:18px">Adresse :<label> </b>
+                                    </div>
+                               </div>
+                               <div class="col-7">
+                                <div class="input-group">
+                                    <label style="font-size:18px">{{app.user.address}}<label>
+                                </div>
+                               </div>
+                            </div>
+                                                        <br>
+                          <div class="row">
+                              <div class="col-5">
+                                    <div class="input-group">
+                                 <b>     <label style="font-size:18px">Ville :<label></b>
+                                    </div>
+                               </div>
+                               <div class="col-7">
+                                <div class="input-group">
+                                    <label style="font-size:18px">{{app.user.city}}<label>
+                                </div>
+                               </div>
+                            </div>
+                                                        <br>
+                          <div class="row">
+                              <div class="col-5">
+                                    <div class="input-group">
+                                  <b>    <label style="font-size:18px">Pays :<label></b>
+                                    </div>
+                               </div>
+                               <div class="col-7">
+                                <div class="input-group">
+                                    <label style="font-size:18px">{{app.user.country}}<label>
+                                </div>
+                               </div>
+                            </div>
+
+                                                             <br>
+                          <div class="row">
+                              <div class="col-5">
+                                    <div class="input-group">
+                                  <b>    <label style="font-size:18px">Email :<label></b>
+                                    </div>
+                               </div>
+                               <div class="col-7">
+                                <div class="input-group">
+                                    <label style="font-size:18px">{{app.user.email}}<label>
+                                </div>
+                               </div>
+                            </div>
+
+
+                                                             <br>
+                          <div class="row">
+                              <div class="col-5">
+                                    <div class="input-group">
+                                  <b>    <label style="font-size:18px">Statut :<label></b>
+                                    </div>
+                               </div>
+                               <div class="col-7">
+                                <div class="input-group">
+                                    <label style="font-size:18px">{{app.user.roles[0]}}<label>
+                                </div>
+                               </div>
+                               <br>
+                            </div>
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><br><br><br><br>
+{% endblock %}

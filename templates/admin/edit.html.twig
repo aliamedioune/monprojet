@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block body %}
+
+
+<style>
+/* Adjust body padding to ensure content doesn't overlap with fixed navbar and footer */
+{# body {
+    padding-top: 100px; /* Height of your fixed navbar */
+    padding-bottom: 100px; /* Height of your fixed footer */
+} #}
+
+/* Styling for the form container */
+.container1 {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto; /* Center the container */
+    max-width: 600px; /* Adjust the width as necessary */
+}
+
+/* Styling for form inputs and select */
+input[type=text],
+input[type=email],
+input[type=password],
+select,
+textarea {
+    width: 100%; /* Full width */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the submit button */
+button[type=submit] {
+    width: 100%;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #5cb85c;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+}
+
+button[type=submit]:hover {
+    background-color: #449d44;
+}
+
+/* Transition effects for interactions */
+input,
+button[type=submit] {
+    transition: all 0.3s ease;
+}
+
+/* Hover and focus states for better user interaction */
+input[type=text]:hover,
+input[type=email]:hover,
+input[type=password]:hover,
+input[type=text]:focus,
+input[type=email]:focus,
+input[type=password]:focus {
+    border-color: #aacfe4;
+    outline: none;
+}
+.btn-return {
+    display: inline-block; /* Allows it to behave like a button */
+    padding: 10px 20px; /* Same padding as your 'Enregistrer' button */
+    font-size: 16px; /* Adjust the font size as needed */
+    border-radius: 4px; /* Rounded corners */
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    text-decoration: none; /* Removes underline from link */
+    color: #fff; /* White text */
+    background-color: #f0ad4e; /* Bootstrap 'btn-warning' color for example */
+    transition: background-color 0.2s; /* Smooth transition for hover effect */
+}
+
+.btn-return:hover {
+    background-color: #ec971f; /* Darker shade for hover effect */
+    text-decoration: none; /* Keeps text underline from coming back on hover */
+    color: #fff; /* Ensure text color does not change on hover */
+}
+</style>
+<div class="container">
+    <h1>Modifer un utilisateur</h1>
+    {{ form_start(userForm) }}
+        {{ form_row(userForm.email) }}
+        {{ form_row(userForm.roles) }}
+        {{ form_row(userForm.plainPassword) }}  
+        {{ form_row(userForm.address) }}
+        {{ form_row(userForm.city) }}
+        {{ form_row(userForm.country) }}
+        {{ form_row(userForm.aboutUs) }}
+        {{ form_row(userForm.name) }}
+        {{ form_row(userForm.surname) }}
+        {{ form_row(userForm.newsletter) }}
+        
+        
+        
+        
+       
+        
+        <button type="submit" class="btn btn-primary">Enregister</button>
+    {{ form_end(userForm) }}
+    
+    {# Link back to the user list #}
+    <a href="{{ path('admin_users_list') }}" class="btn-return">Retourne a la liste</a>
+</div>
+{% endblock %}

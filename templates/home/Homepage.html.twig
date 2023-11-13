@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %} 
+
+
+
+{% block body %}
+        
+        <main id="main">
+
+        <div class="noel">
+            <div class="container">
+                <p id="titrenoel">C'est noël, profitez-en</p>
+                <img class ="offre"src="{{asset("assets/img/offre-noel.jpg")}}" alt="">
+                <p>*Pour toute commande effectué avant le 20 décembre</p>
+                <div class="flexslider">
+                    <ul class="slides">
+                    <li> 
+                        <img src="{{asset("assets/img/slider/1.jpg")}}" />
+                    </li>
+                    <li>
+                        <img src="{{asset("assets/img/slider/2.jpg")}}"/>
+                    </li>
+                    </ul>
+                </div>
+            </div>
+                
+        </div>
+
+        <section id="choix">
+
+            <div class="container">
+                <div class="padding">
+
+                    <h1>Choisissez votre thé</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores amet id, omnis quasi et ab. Porro consequatur nesciunt sapiente, soluta nulla quam sint voluptates repellat ex rem impedit voluptate. Vero.</p>
+                </div>
+
+                <div class ="fig">
+                    <figure>
+                        <img src="{{asset("assets/img/tea/1.jpg")}}" alt="">
+                        <figcaption>Thé noir</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="{{asset("assets/img/tea/2.jpg")}}" alt="">
+                        <figcaption>Thé vert</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="{{asset("assets/img/tea/3.jpg")}}" alt="">
+                        <figcaption>Oolong</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="{{asset("assets/img/tea/4.jpg")}}" alt="">
+                        <figcaption>Thé blanc</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="{{asset("assets/img/tea/5.jpg")}}" alt="">
+                        <figcaption>Rooibos</figcaption>
+                    </figure>
+                </div> 
+
+            </div>
+
+        </section>
+        <section id="selection">
+
+            <div class="container padding">
+                <h2>Notre sélection</h2>
+
+                <div class="article">
+                    <article>
+                        <h3><span>Notre nouveauté</span></h3>
+                        <figure>
+                            <img src="{{asset("assets/img/product/product1.jpg")}}" alt="">
+                            <figcaption>Thé du hammam</figcaption>
+                        </figure>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur dolorem pariatur, ea nesciunt qui adipisci. Ratione a voluptates exercitationem accusamus debitis sapiente, autem, totam illum sint dolor, molestias ipsam dolorum.</p>
+                        <p>A partir de</p>
+                        <p class="prix">8,50€</p>
+                        <a href="produit" class="upper achat">voir ce produit</a>
+                    </article>
+
+                    <article>
+                        <h3><span>Notre best-seller</span></h3>
+                        <figure>
+                            <img src="{{asset("assets/img/product/product2.jpg")}}" alt="">
+                            <figcaption>Infusion Herboriste</figcaption>
+                        </figure>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur dolorem pariatur, ea nesciunt qui adipisci. Ratione a voluptates exercitationem accusamus debitis sapiente, autem, totam illum sint dolor, molestias ipsam dolorum.</p>
+                        <p>A partir de</p>
+                        <p class="prix">7,60€</p>
+                        <a href="produit" class="upper achat">voir ce produit</a>
+                    </article>
+
+                    <article>
+                        <h3><span>Notre coup de coeur</span></h3>
+                        <figure>
+                            <img src="{{asset("assets/img/product/product3.jpg")}}" alt="">
+                            <figcaption>Blue of London</figcaption>
+                        </figure>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur dolorem pariatur, ea nesciunt qui adipisci. Ratione a voluptates exercitationem accusamus debitis sapiente, autem, totam illum sint dolor, molestias ipsam dolorum.</p>
+                        <p>A partir de</p>
+                        <p class="prix">9,00€</p>
+                        <a href="produit" class="upper achat">voir ce produit</a>
+                    </article>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+        {% endblock %}

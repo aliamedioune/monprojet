@@ -1,0 +1,172 @@
+{% extends 'bienvenueImportcadeau.html.twig' %}
+
+{% block title %}Thé Tiotop{% endblock %}
+
+{% block stylesheets %}
+  
+{% endblock %}
+
+{% block body %}
+
+
+
+
+{# <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/">TeaTipTop</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav me-auto">
+         <li class="nav-item">
+                <a class="nav-link" href="{{path('app_code_cadeau_check')}}" id="ticketsRecord">Mes gains</a>
+            </li>
+            
+      </ul>
+      <form class="d-flex">
+    <ul class="navbar-nav me-auto">
+       <li class="nav-item d-flex">
+                <a class="nav-link" style="color:white;" href="/profil">Mon profil</a>
+            </li>
+        <li class="nav-item d-flex">
+                <a class="nav-link" style="color:white;" href="/logout">Déconnection</a>
+            </li>
+            </ul>
+      </form>
+    </div>
+  </div>
+</nav> #}
+
+
+
+
+
+
+<br/> <br/> <br/><br/> <br/> <br/>
+<style>
+  input.form-control {
+    width: 50%; /* Full width */
+    padding: 10px; /* Adjust padding as necessary */
+    font-size: 16px; /* Adjust font size as necessary */
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+  }
+</style>
+
+<div class="container">
+    <div class="justify-content-center row">
+        <div class="col-md-8">
+            <div class="card-group">
+                <!-- Adjust the background color to match the green theme better -->
+                <div class="card py-5" style="background-color: rgba(50, 205, 50, 0.3); border: 1px solid #4CAF50;">
+                    <div class="card-body text-center">
+                        <div class="col-12" id="blockCodeCadeau">
+                            <h2 class="text-white">Veuillez rentrer le code cadeau de 10 chiffres se trouvant sur votre facture.</h2>
+                            <p class="Bold text-success" id="result"></p>
+                            <!-- Add a bit more margin for visual spacing -->
+                            <div class="row my-3">
+                                <div class="col-7">
+                                    <input type="text" id="codeCadeau" placeholder="Entrez ici votre code cadeau !" class="form-control">
+                                </div>
+                                <div class="col-4">
+                                    <input type="button" id="submitCodeCadeau" value="Valider" class="btn btn-success btn-block">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Adjust background color and add border -->
+        <div class="card border-success contentCodeCadeau col-sm-6 mt-4 " style="background-color: rgba(245, 225, 235, 0.8)" id="blockTicketcRecord" hidden=true >
+                            <div class="card-body">
+                            <h4 class="card-title">Mes Gains :</h4>
+                            {% if ticketsCount > 0 %}
+                            <p class="card-text" id="">Vous avez gagné <B>{{ ticketsCount }} </b> cadeau. Voici la liste des gains que vous avez déjà gagné :</p>
+                            {% else %}
+                             <p class="card-text" id="" style="font-size:18px"> Vous avez pas de gain .</p>
+                            {% endif %}
+                                <ul>
+                                {% for ticket in ticketsOwnByUser %}
+                                    <li style="list-style: none;">{{ ticket.ticket.title }}</li>
+                                {% endfor %}
+                                </ul>
+                            </div>
+                            </div>
+    </div>
+</div>
+<br><br><br><br><br><br><br><br><br><br>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+
+<script>
+
+
+$(document).on('click','#submitCodeCadeau',function(e){
+    e.preventDefault();
+    codeCadeau = document.getElementById('codeCadeau').value;
+     // console.log(codeCadeau)
+    if(codeCadeau.length != 10 || isNaN(codeCadeau)){
+        result = document.getElementById('result');
+        result.style = "color:red;";
+        result.innerHTML = "Le code doit contenir 10 chiffres."
+        setTimeout(function(){result.innerHTML = "Le code doit contenir 10 chiffres.";},2000);
+
+    }
+    else{
+        $.ajax({
+            url: 'codecadeau/check',
+            method:'post',
+            datatype:'json',
+            data: {
+                "codeCadeau" : codeCadeau
+            },
+            async:true,
+            success: function($data){
+                if($data === 0){
+                    console.log($data)
+                    result = document.getElementById('result');
+                    result.style = "color:red;";
+                    result.innerHTML = "Le code à déjà été utiliser";
+                    setTimeout(function(){result.innerHTML = "";},2000);
+                }
+                else if($data === 1){
+                    result = document.getElementById('result');
+                    result.style = "color:red;";
+                    result.innerHTML = "Le délais pour obtenir votre gain est dépassé.";
+                    setTimeout(function(){result.innerHTML = "";},20000);
+                }
+                else{
+                    result = document.getElementById('result');
+                    result.style = "color:white;";
+                    result.innerHTML = "vous avez remporter un: "+$data+" !";
+                    setTimeout(function(){result.innerHTML = "";},2000);
+                }
+            }
+
+
+        });
+    }
+});
+
+$(document).on('click','#ticketsRecord',function(e){
+    e.preventDefault();
+    blockCodeCadeau = document.getElementById('blockCodeCadeau');
+    blockTicketcRecord = document.getElementById('blockTicketcRecord');
+    blockCodeCadeau.hidden = false;
+    blockTicketcRecord.hidden = false;
+
+});
+
+$(document).on('click','#enterCode',function(e){
+    e.preventDefault();
+    blockCodeCadeau = document.getElementById('blockCodeCadeau');
+    blockTicketcRecord = document.getElementById('blockTicketcRecord');
+    blockCodeCadeau.hidden = false;
+    blockTicketcRecord.hidden = false;
+
+});
+
+</script>
+{% endblock %}

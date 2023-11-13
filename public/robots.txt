@@ -1,0 +1,7 @@
+User-agent: *
+
+Disallow: /admin/
+Disallow: /employe/
+
+User-agent: *
+Sitemap: http://dsp-archiwebf22-aa.fr/public/sitemap.xml

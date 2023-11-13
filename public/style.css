@@ -1,0 +1,23 @@
+body{
+    background-image: url('uploads/images/back.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+h3{
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.cardCreatAccount{
+    background-color: #8989e5;
+}
+.buttonSubmitLogin{
+    background-color: #8989e5;
+}
+.buttonSubmitRegister{
+    background-color: white;
+}
+.presentationOfTheGame{
+    text-align: center;
+}

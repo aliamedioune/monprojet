@@ -1,0 +1,46 @@
+version: '3.9'
+
+services:
+#PHP 7.4-fpm
+  php:
+    build:
+      context: /var/jenkins_home/workspace/CICDWORKFLOW
+      dockerfile: Dockerfilephp
+    container_name: '${PROJECT_NAME}_php'
+    environment:
+      - VIRTUAL_HOST=${VIRTUAL_HOST}
+      - APP_ENV=${APP_ENV}
+    depends_on:
+      - mysql
+
+
+#NGINX nginx-proxy
+  nginx:
+    build:
+      context: /var/jenkins_home/workspace/CICDWORKFLOW
+      dockerfile: Dockerfile
+    container_name: '${PROJECT_NAME}_nginx'
+
+    depends_on:
+      - php
+    ports:
+      - 80:80
+      - 443:443
+#MYSQL 8.0.19
+  mysql:
+    build:
+      context: /var/jenkins_home/workspace/CICDWORKFLOW/mysql
+      dockerfile: Dockerfile
+    container_name: '${PROJECT_NAME}_mysql'
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - mysql_volume:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+volumes:
+  mysql_volume:

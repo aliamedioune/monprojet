@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %} 
+{% block body %}
+
+    <main id="product">
+        <section id="secprod">
+            <div class="container padding">
+                <h1>Le meilleure thé</h1>
+                <article>
+                    <div class="flexthe">
+                        <div>
+                            <h2>Blue of London</h2>
+                            <h3>Thé noir à la bergamote</h3>
+                            <p>Réf: 133742</p>
+                        </div>
+                        <div id="star">
+                        
+                            <p>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </p>
+                            <a href="">voir les 56 avis</a>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <img src="{{asset("assets/img/product/product3.jpg" )}}" alt="">
+                        <form action="">
+                            <select name="quantité">
+                                <option value="null">Sachet de 100 g</option>
+                                <option value="null">Sachet de 200 g</option>
+                            </select>
+                            <input  value=9,00€ readonly/>
+                            <button type="submit" class="achat upper">ajouter au panier</button>
+                            <a href=""><i class="fas fa-heart"></i>Ajouter a ma liste d'envie</a>
+                            
+                        </form>
+                    </div>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius, libero porro quibusdam ullam id dolore ipsam nisi qui tenetur possimus enim voluptate quod beatae. Aspernatur odio atque accusamus modi rerum!</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro consequatur nisi expedita sint voluptatibus, asperiores illum sunt non voluptate doloremque ullam dolorum deleniti maxime illo ducimus, ipsum veritatis, adipisci provident.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente aspernatur quae maxime tempore incidunt optio odio quidem veniam a beatae dolores, iusto vel, quasi laudantium magnam id sint deserunt dignissimos?</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto explicabo ullam laudantium velit. Deleniti explicabo alias mollitia eaque et molestias obcaecati unde ex sunt aspernatur, cupiditate aperiam tempora? Velit, quibusdam.</p>
+
+                </article>
+            </div>
+        </section>
+
+    </main>
+  {% endblock %}

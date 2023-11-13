@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Thé Tiotop{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styleHome.css') }}">
+{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/bienvenu">TeaTipTop</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/codecadeau/check" id="ticketsRecord">Historique des gains</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/bienvenu" id="enterCode">Entrer un code</a>
+            </li>
+            </ul>
+            <ul class="navbar-nav navbar-right">
+            <li class="nav-item" >
+                <a class="nav-link" href="/logout">Déconnection</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<br/> <br/> <br/><br/> <br/> <br/>
+
+{% endblock %}

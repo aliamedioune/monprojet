@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Thé Tiotop{% endblock %}
+
+{% block stylesheets %}
+    
+
+{% endblock %}
+
+{% block body %}
+
+
+
+<br><br>
+
+
+    <div class="container" >
+        <div class="justify-content-center row">
+            <div class="col-md-8" >
+                <div class="card-group" >
+                    <div class="text-white cardSubmitCodeCadeau py-5 d-md-down-none card" >
+                        <div class="text-center card-body">
+                            <div class="col-12 " style="background-color: rgba(50, 205, 50, 0.3); border: 1px solid #4CAF50;">
+                           
+                            <div class="row">
+                                <h2 class="text-white">Le tirage au sort du gros lot aura lieu le {{date|date_modify("+30 day")|date('d-m-Y')}}.</h2>
+                            </div>
+                            {% if "now"|date('d-m-Y') <= date|date_modify("+30 day")|date('d-m-Y') %}
+                            {% if user == null %}
+                            <div class="row">
+                            <h2 class="text-white">Si vous voulez lancer le tirage au sort du gros lot veuillez cliquer sur le button </h2>
+                            </div>
+                                <br><br>
+                                {# <a href="/admin/groswin" class="btn btn-success btn-block">Lancer </a> #}
+                                <a href="/admin/groswin" class="btn btn-block" style="background-color: #4CAF50; color: white; padding: 10px 25px; font-size: 18px; font-weight: bold; border: none; border-radius: 5px; box-shadow: 0 4px #999; text-align: center; display: block; margin: 0 auto; transition: background-color 0.2s, box-shadow 0.2s;">Lancer</a>
+
+                            {% endif %}
+                            {% endif %}
+                                </div>
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+                      {% if user %}
+                     <div class="col-md-8" >
+                      <br><br>
+                <div class="card-group" >
+                    <div class="text-white cardSubmitCodeCadeau py-5 d-md-down-none card" style="background-color: rgba(0, 0, 245, 0.5)">
+                        <div class="text-center card-body">
+                            <div class="col-12 ">
+                          
+                            <div class="row">
+                                <h2 class="text-white">Le gagnant du gros lot de 360€ est : {{ user.user.surname}} {{ user.user.name}}</h2>
+                            </div>
+
+                           
+                                </div>
+                                
+                                </div>
+                            </div>
+                        </div> 
+                        {% endif %}
+                    </div>
+                </div>
+
+                
+            </div>
+
+
+
+<br><br> <br>
+
+
+
+        
+ 
+</div>
+</div>
+<br><br><br><br><br><br><br><br><br><br>
+
+
+
+
+
+
+
+
+{% endblock %}

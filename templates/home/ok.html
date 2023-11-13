@@ -1,0 +1,434 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Thé Tiotop{% endblock %}
+
+{% block stylesheets %}
+  
+{% endblock %}
+
+{% block body %}
+
+
+
+
+{# <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/">TeaTipTop</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav me-auto">
+         <li class="nav-item">
+                <a class="nav-link" href="{{path('app_code_cadeau_check')}}" id="ticketsRecord">Mes gains</a>
+            </li>
+            
+      </ul>
+      <form class="d-flex">
+    <ul class="navbar-nav me-auto">
+       <li class="nav-item d-flex">
+                <a class="nav-link" style="color:white;" href="/profil">Mon profil</a>
+            </li>
+        <li class="nav-item d-flex">
+                <a class="nav-link" style="color:white;" href="/logout">Déconnection</a>
+            </li>
+            </ul>
+      </form>
+    </div>
+  </div>
+</nav> #}
+
+
+
+
+
+
+<br/> <br/> <br/><br/> <br/> <br/>
+<style>
+  input.form-control {
+    width: 50%; /* Full width */
+    padding: 10px; /* Adjust padding as necessary */
+    font-size: 16px; /* Adjust font size as necessary */
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+  }
+</style>
+
+<div class="container">
+    <div class="justify-content-center row">
+        <div class="col-md-8">
+            <div class="card-group">
+                <!-- Adjust the background color to match the green theme better -->
+                <div class="card py-5" style="background-color: rgba(50, 205, 50, 0.3); border: 1px solid #4CAF50;">
+                    <div class="card-body text-center">
+                        <div class="col-12" id="blockCodeCadeau">
+                            <h2 class="text-white">Veuillez rentrer le code cadeau de 10 chiffres se trouvant sur votre facture.</h2>
+                            <p class="Bold text-success" id="result"></p>
+                            <!-- Add a bit more margin for visual spacing -->
+                            <div class="row my-3">
+                                <div class="col-7">
+                                    <input type="text" id="codeCadeau" placeholder="Entrez ici votre code cadeau !" class="form-control">
+                                </div>
+                                <div class="col-4">
+                                    <input type="button" id="submitCodeCadeau" value="Valider" class="btn btn-success btn-block">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Adjust background color and add border -->
+        <div class="card border-success contentCodeCadeau col-sm-6 mt-4 " style="background-color: rgba(245, 225, 235, 0.8)" id="blockTicketcRecord" hidden=true >
+                            <div class="card-body">
+                            <h4 class="card-title">Mes Gains :</h4>
+                            {% if ticketsCount > 0 %}
+                            <p class="card-text" id="">Vous avez gagné <B>{{ ticketsCount }} </b> cadeau. Voici la liste des gains que vous avez déjà gagné :</p>
+                            {% else %}
+                             <p class="card-text" id="" style="font-size:18px"> Vous avez pas de gain .</p>
+                            {% endif %}
+                                <ul>
+                                {% for ticket in ticketsOwnByUser %}
+                                    <li style="list-style: none;">{{ ticket.ticket.title }}</li>
+                                {% endfor %}
+                                </ul>
+                            </div>
+                            </div>
+    </div>
+</div>
+<br><br><br><br><br><br><br><br><br><br>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+
+<script>
+
+
+$(document).on('click','#submitCodeCadeau',function(e){
+    e.preventDefault();
+    codeCadeau = document.getElementById('codeCadeau').value;
+     // console.log(codeCadeau)
+    if(codeCadeau.length != 10 || isNaN(codeCadeau)){
+        result = document.getElementById('result');
+        result.style = "color:red;";
+        result.innerHTML = "Le code doit contenir 10 chiffres."
+        setTimeout(function(){result.innerHTML = "Le code doit contenir 10 chiffres.";},2000);
+
+    }
+    else{
+        $.ajax({
+            url: 'codecadeau/check',
+            method:'post',
+            datatype:'json',
+            data: {
+                "codeCadeau" : codeCadeau
+            },
+            async:true,
+            success: function($data){
+                if($data === 0){
+                    console.log($data)
+                    result = document.getElementById('result');
+                    result.style = "color:red;";
+                    result.innerHTML = "Le code à déjà été utiliser";
+                    setTimeout(function(){result.innerHTML = "";},2000);
+                }
+                else if($data === 1){
+                    result = document.getElementById('result');
+                    result.style = "color:red;";
+                    result.innerHTML = "Le délais pour obtenir votre gain est dépassé.";
+                    setTimeout(function(){result.innerHTML = "";},20000);
+                }
+                else{
+                    result = document.getElementById('result');
+                    result.style = "color:white;";
+                    result.innerHTML = "vous avez remporter un: "+$data+" !";
+                    setTimeout(function(){result.innerHTML = "";},2000);
+                }
+            }
+
+
+        });
+    }
+});
+
+$(document).on('click','#ticketsRecord',function(e){
+    e.preventDefault();
+    blockCodeCadeau = document.getElementById('blockCodeCadeau');
+    blockTicketcRecord = document.getElementById('blockTicketcRecord');
+    blockCodeCadeau.hidden = false;
+    blockTicketcRecord.hidden = false;
+
+});
+
+$(document).on('click','#enterCode',function(e){
+    e.preventDefault();
+    blockCodeCadeau = document.getElementById('blockCodeCadeau');
+    blockTicketcRecord = document.getElementById('blockTicketcRecord');
+    blockCodeCadeau.hidden = false;
+    blockTicketcRecord.hidden = false;
+
+});
+
+</script>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+
+namespace App\Controller;
+
+
+use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\DistributedTicketsRepository;
+use App\Repository\TicketsRepository;
+use App\Repository\GameRepository;
+use App\Repository\WinnersRepository;
+use App\Entity\Winners;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
+
+
+
+class HomeController extends AbstractController
+{         
+    protected $em;
+    protected $distributedTicketsRepository;
+    protected $ticketsRepository;
+    protected $gameRepository;
+    protected $winnersRepository;
+
+    public function __construct(EntityManagerInterface $em,WinnersRepository $winnersRepository, DistributedTicketsRepository $distributedTicketsRepository, TicketsRepository $ticketsRepository, GameRepository $gameRepository){
+        $this->em = $em;
+        $this->distributedTicketsRepository = $distributedTicketsRepository;
+        $this->ticketsRepository = $ticketsRepository;
+        $this->gameRepository = $gameRepository;
+        $this->winnersRepository = $winnersRepository;
+    }
+
+    /**
+     * @Route("/", name="app_home")
+     */
+    public function index(Request $request): Response
+    {
+        return $this->render('home/Homepage.html.twig');
+    }
+    /**
+     * @Route("/about", name="about")
+     */
+    public function about(Request $request): Response
+    {
+        return $this->render('home/about.html.twig');
+    }
+    /**
+     * @Route("/The", name="nosthe")
+     */
+    public function The(Request $request): Response
+    {
+        return $this->render('home/The.html.twig');
+    }
+    /**
+     * @Route("/produit", name="Produit")
+     */
+    public function Produuit(Request $request): Response
+    {
+        return $this->render('home/produit.html.twig');
+    }
+
+
+
+    public function index1(Request $request): Response
+    {
+        $user = $this->getUser();
+        if(!$user){
+            return $this->redirectToRoute('app_login', []);  
+        }
+        else{
+            if($user->getRoles()[0] == "ROLE_EMPLOYE"){
+                return $this->redirectToRoute('app_employe', []);
+            }
+            else if($user->getRoles()[0] == "ROLE_ADMIN"){
+                return $this->redirectToRoute('app_admin', []);
+            }
+            else{
+                return $this->redirectToRoute('app_bienvenu', []);
+            }
+        }
+    }
+
+    /**
+     * @Route("/bienvenu", name="app_bienvenu")
+     */
+    public function bienvenu(Request $request): Response
+    {
+        $user = $this->getUser();
+        if(!$user){
+            return $this->redirectToRoute('app_login', []);  
+        }
+        $ticketsOwnByUser = $this->winnersRepository->findBy(['user' => $user]);
+       
+        
+        return $this->render('home/index.html.twig', [
+          
+            'ticketsCount' => count($ticketsOwnByUser),
+            'ticketsOwnByUser' => $ticketsOwnByUser
+        ]);
+    }
+
+
+    /**
+     * @Route("/profil", name="profil")
+     */
+    public function profilAction(Request $request): Response
+    {
+        $user = $this->getUser();
+        if(!$user){
+            return $this->redirectToRoute('app_login', []);  
+        }
+        $ticketsOwnByUser = $this->winnersRepository->findBy(['user' => $user]);
+       
+        
+        return $this->render('home/profil.html.twig');
+    }
+    /**
+     * @Route("/mentions", name="mentions")
+     */
+    public function montionAction(Request $request): Response
+    {
+        
+        return $this->render('home/cgv.html.twig');
+    }        
+    
+                  
+   
+    /**
+     * @Route("/codecadeau/check", name="app_code_cadeau_check")
+     */
+    public function codecadeauCheck(Request $request): Response
+    {
+        $user = $this->getUser();
+        // dd($user);
+        $today = $this->gameRepository->findAll();
+        // dd($today);
+
+        // dd("getClosingDate : ", $today[0]->getClosingDate());
+
+        if(($today[0]->getClosingDate()) >= new \DateTime('-30 days')){
+            
+            $codeCadeau = $request->request->get('codeCadeau');
+            // dd("le code cadeau : ", +$codeCadeau);
+            // var_dump($codeCadeau);
+            // dd($codeCadeau);
+            $isCodeExist = $this->distributedTicketsRepository->findOneBy(['numero' => $codeCadeau]);
+            // dd("le code isCodeExist : ", $isCodeExist);
+            if($isCodeExist){
+                $values = [1 , 2, 3, 4, 5];
+                
+
+                $probas = [4, 6, 10, 20, 60];
+                $result = pickWeightedRandomValue($values, $probas);
+
+                $lot1 = $this->ticketsRepository->find(1)->getTicketsLeft();
+                $lot2 = $this->ticketsRepository->find(2)->getTicketsLeft();
+                $lot3 = $this->ticketsRepository->find(3)->getTicketsLeft();
+                $lot4 = $this->ticketsRepository->find(4)->getTicketsLeft();
+                $lot5 = $this->ticketsRepository->find(5)->getTicketsLeft();
+
+                $winningLot = checkvalue($result, $lot1, $lot2, $lot3, $lot4, $lot5);
+                $dataTicket = $this->ticketsRepository->find($winningLot);
+              
+                $winner = new Winners;
+                $winner ->setUser($user)
+                        ->setTicket($dataTicket)
+                        ->setSend(false);
+                $this->em->persist($winner);
+
+                $dataTicket->setTicketsLeft(($dataTicket->getTicketsLeft())-1);
+                $this->em->persist($dataTicket);
+                
+                $this->em->remove($isCodeExist[0]);
+
+                $this->em->flush();
+
+                return new JsonResponse($this->ticketsRepository->find($winningLot)->getTitle(), 200);
+            }
+            return new JsonResponse(0, 200);
+        }
+        return new JsonResponse(1, 200);
+    }
+
+
+}
+
+function pickWeightedRandomValue($values, $weights) {
+    $rand = rand(0,100);
+    for($i=0; $i<count($weights); $i++) {
+      if($rand <= $weights[$i]) return $values[$i];
+      $rand -= $weights[$i];
+    }
+  }
+
+
+function checkvalue($value, $lot1, $lot2, $lot3, $lot4, $lot5){
+
+    if($value === 1){
+    if($lot1 > 0){return 1;}
+    else if($lot1 <= 0 && $lot2 > 0){return 2;} 
+    else if($lot1 <= 0 && $lot2 <= 0 && $lot3 > 0){return 3;}
+    else if($lot1 <= 0 && $lot2 <= 0 && $lot3 <= 0 && $lot4 > 0){return 4;}
+    else if($lot1 <= 0 && $lot2 <= 0 && $lot3 <= 0 && $lot4 <= 0 && $lot5 > 0){return 5;}
+    }
+    else if($value === 2){
+    if($lot2 > 0){return 2;}
+    else if($lot2 <= 0 && $lot3 > 0){return 3;}
+    else if($lot2 <= 0 && $lot3 <= 0 && $lot4 > 0){return 4;}
+    else if($lot2 <= 0 && $lot3 <= 0 && $lot4 <= 0 && $lot5 > 0){return 5;}
+    else if($lot2 <= 0 && $lot3 <= 0 && $lot4 <= 0 && $lot5 <= 0 && $lot1 > 0){return 1;}
+    }
+    else if($value === 3){
+    if($lot3 > 0){return 3;}
+    else if($lot3 <= 0 && $lot4 > 0){return 4;}
+    else if($lot3 <= 0 && $lot4 <= 0 && $lot5 > 0){return 5;}
+    else if($lot3 <= 0 && $lot4 <= 0 && $lot5 <= 0 && $lot2 > 0){return 2;}
+    else if($lot3 <= 0 && $lot4 <= 0 && $lot5 <= 0 && $lot2 <= 0 && $lot1 > 0){return 1;}
+    }
+    else if($value === 4){
+    if($lot4 > 0){return 4;}
+    else if($lot4 <= 0 && $lot5 > 0){return 5;}
+    else if($lot4 <= 0 && $lot5 <= 0 && $lot3 > 0){return 3;}
+    else if($lot4 <= 0 && $lot5 <= 0 && $lot3 <= 0 && $lot2 > 0){return 2;}
+    else if($lot4 <= 0 && $lot5 <= 0 && $lot3 <= 0 && $lot2 <= 0 && $lot1 > 0){return 1;}
+    }
+    else if($value === 5){
+    if($lot5 > 0){return 5;}
+    else if($lot5 <= 0 && $lot4 > 0){return 4;}
+    else if($lot5 <= 0 && $lot4 <= 0 && $lot3 > 0){return 3;}
+    else if($lot5 <= 0 && $lot4 <= 0 && $lot3 <= 0 && $lot2 > 0){return 2;}
+    else if($lot5 <= 0 && $lot4 <= 0 && $lot3 <= 0 && $lot2 <= 0 && $lot1 > 0){return 1;}
+    }
+} 

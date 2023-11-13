@@ -1,0 +1,232 @@
+{% extends 'dexxx.html.twig' %}
+
+{% block title %}Thé Tiotop{% endblock %}
+
+{% block stylesheets %}
+    {# <link rel="stylesheet" href="{{ asset('dashboard.css') }}"> #}
+    
+{% endblock %}
+
+{% block body %}
+
+<nav  id="topSideBar">
+  
+</nav>
+
+
+       
+
+
+<section class="wrapper" id="blockStatistique">
+  <div class="row row-cols-1 row-cols-md-1 g-4 mb-4²" >
+    <div class="col mb-4">
+      <div class="card bg-light">
+        <div class="card-body">
+          <h5 class="card-title">Tickets restant</h5>
+          <p class="card-text">{{  ticketsdis|length - ticketwin|length }}  Tickets </p>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-2 g-4 ">
+      {% for ticket in tickets %}
+      <div class="col">
+        <div class="card bg-light">
+          <div class="card-body">
+            <h5 class="card-title">{{ ticket.title }}</h5>
+            <p class="card-text">tickets restant : {{ ticket.ticketsLeft }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  {% for about in aboutUs %}
+  <input type="hidden" class="aboutUsInfo" value="{{ about.aboutUs }}-{{ about.count }}"/>
+  {% endfor %}
+  {% for city in cities %}
+  <input type="hidden" class="cityInfo" value="{{ city.city }} {{ city.count }}"/>
+  {% endfor %}
+ 
+
+  <div class="container">
+    
+    <div class="row mt-4">
+    <div class="col-6">
+<div class="card border-primary " style="max-width: 70rem;">
+      <div class="card-header">Comment les participants ont appris l'existance du jeu :</div>
+      <div class="card-body">
+        <div class="chart-container mt-3" style="position: relative; height:60vh; width:28vw ;">
+          <canvas id="myChart" width="50" height="50"></canvas>
+        </div>
+      </div>
+</div>
+</div>
+
+ <div class="col-6">
+<div class="card border-primary" style="max-width: 80rem;">
+
+     <div class="card-header">Localisation des participants (5 maximum) :</div>
+      <div class="card-body">
+        <div class="chart-container mt-4" style="position: relative; height:60vh; width:28vw">
+          <canvas id="myChartBar" width="50" height="50"></canvas>
+        </div>
+      </div>
+    </div>
+</div>
+  </div>
+
+</section>
+
+<section class="wrapper" id="blockNewsletter" hidden=true>
+<div class="app d-flex mt-5 flex-row align-items-center">
+    <div class="container">
+        <div class="justify-content-center row">
+            <div class="col-md-8">
+                <div class="card-group">
+                    <div class="text-white py-5 d-md-down-none card blockBackgroundNewsletter">
+                        <div class="text-center card-body blockBackgroundNewsletter" id="listCustomerTickets">
+                            <div class="col-12 contentUserGain" id="blockUserGain">
+                                <p> <b>{{ newsLetterCustomerNB }} </b> clients qui ce sont inscris à la newsletter.</p>
+                                <p>Télécharger un fichier CSV contenant leurs email :</p>
+                                <a href="{{path('Mails')}}" class="btn btn-success">Télécharger</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <br><br><br>
+  <br><br><br><br>
+  <br><br><br><br>
+</section>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+<script>
+
+  var topSideBar = document.getElementById('topSideBar');
+  baseUrl = topSideBar.dataset.baseurl;
+
+  {# DONUTS #}
+  titleAboutUs = [];
+  countAboutUs = [];
+  aboutUsInfo = document.getElementsByClassName('aboutUsInfo');
+  for(i=0;i<aboutUsInfo.length;i++){
+    data = aboutUsInfo[i].value;
+    data = data.split("-");
+    titleAboutUs.push(data[0]);
+    countAboutUs.push(parseInt(data[1]));
+  }
+
+  const ctx = document.getElementById('myChart').getContext('2d');
+  const myChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+          labels: titleAboutUs,
+          datasets: [{
+              data: countAboutUs,
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.5)',
+                  'rgba(54, 162, 235, 0.5)',
+                  'rgba(255, 206, 86, 0.5)',
+                  'rgba(75, 192, 192, 0.5)',
+                  'rgba(255, 159, 64, 0.5)'
+              ]
+          }]
+      },
+      options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Chart.js Doughnut Chart'
+        }
+      }
+    }
+  });
+
+{# BAR #}
+
+  titleCity = [];
+  countCity = [];
+  cityInfo = document.getElementsByClassName('cityInfo');
+  for(i=0;i<cityInfo.length;i++){
+    data = cityInfo[i].value;
+    data = data.split(" ");
+    
+    titleCity.push(data[0]);
+    countCity.push(parseInt(data[1]));
+  }
+
+  const ctxBar = document.getElementById('myChartBar').getContext('2d');
+  const myChartBar = new Chart(ctxBar, {
+     type: 'doughnut',
+      data: {
+          labels: titleCity,
+          datasets: [{
+              data: countCity,
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.5)',
+                  'rgba(54, 162, 235, 0.5)',
+                  'rgba(255, 206, 86, 0.5)',
+                  'rgba(75, 192, 192, 0.5)',
+                  'rgba(255, 159, 64, 0.5)'
+              ]
+          }]
+      },
+      options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Chart.js Doughnut Chart'
+        }
+      }
+    }
+  });
+
+{# SWITCH DATA AND STATISTIQUE #}
+$(document).on('click','#statistiques',function(e){
+    e.preventDefault();
+    blockStatistique = document.getElementById('blockStatistique');
+    blockNewsletter = document.getElementById('blockNewsletter');
+    blockStatistique.hidden = false;
+    blockNewsletter.hidden = true;
+});
+$(document).on('click','#newsletter',function(e){
+    e.preventDefault();
+    blockStatistique = document.getElementById('blockStatistique');
+    blockNewsletter = document.getElementById('blockNewsletter');
+    blockStatistique.hidden = true;
+    blockNewsletter.hidden = false;
+});
+
+{# GET EMAIL #}
+$(document).on('click','#sendNewsletter',function(e){
+    emailInfo = document.getElementsByClassName('emailInfo');
+    csvContent = "data:text/csv;charset=utf-8,";
+    for(i=0;i<emailInfo.length;i++){
+      csvContent += emailInfo[i].value + "\r\n";
+    }
+      var encodedUri = encodeURI(csvContent);
+      var link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", "customers_email.csv");
+      document.body.appendChild(link);
+      link.click();
+});
+
+</script>
+
+{% endblock %}

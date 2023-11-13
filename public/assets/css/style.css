@@ -1,0 +1,487 @@
+*
+{
+    box-sizing: border-box;
+    outline: none;
+    transition:all 0.5s ease 0s;
+}
+html
+{
+    font-size: 62.5%;
+}
+body
+{
+    font-family: 'Open Sans',sans-serif;
+    font-size: 1.6rem;
+    color: #666;
+    background-color: #f2f2f2;
+    text-align: center;
+}
+/**************** COMMUN ******************/
+
+.container
+{
+    max-width:1100px;
+    margin:auto;
+}
+.padding
+{
+    padding:30px 25px 30px 25px;
+}
+.upper
+{
+    text-transform: uppercase;
+}
+.prix
+{
+    font-size: 2.4rem;
+    font-weight: bold;
+    margin-bottom: 60px;
+}
+.achat
+{
+    background-color: #b09067;
+    color: #fff;
+    padding:20px 15px 20px 15px;
+}
+header a,#main a,#product a,#assurance a,#liste a,#listing a
+{
+    text-decoration: none;
+}
+header, header a,h4,#footer,#footer a
+{
+    color: #fff;
+}
+#main #selection img,button,#product img, section,#listing img,#about img
+{
+    width: 100%;
+}
+main,footer
+{
+    line-height: 1.8; 
+}
+section div
+{
+    background-color: #fff; 
+    padding-bottom: 50px;
+}
+figcaption
+{
+    font-size: 2rem;
+    font-weight:bold ;
+}
+/**************** TITRE ******************/
+
+h1,h2,h3,#titrenoel
+{
+    color: #96b011;
+}
+h1,#titrenoel
+{
+    font-size: 3.2rem;
+}
+h2
+{
+    font-size: 2.5rem;
+}
+h3
+{
+    font-size: 2rem;
+}
+h1,h2,h3,h4,figcaption,#titrenoel
+{
+    font-family: 'Amaranth', sans-serif;
+}
+#product h2,#product h3,input,#about h2,#about aside h3
+{
+    color:#666
+}
+/**************** HEADER ******************/
+
+header
+{
+    background-color: #96B011;
+    background-image: url("../img/bg.jpg");
+    background-position: center;
+    background-size:cover;
+    padding-bottom: 30px;
+}
+header > img,#panier,.noel
+{
+    display: none;
+}
+header > p
+{
+    background-color: rgba(0,0,0,0.1);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 0px;
+}
+header div div
+{
+    display: flex;
+    flex-direction: column-reverse;
+}
+header div div p
+{
+    align-self:flex-start;
+    box-shadow:#768b0d 1px 0px 1px 2px;
+    padding: 10px 20px 10px 50px;
+    border-radius: 50px;
+    border-left: none;
+    margin-left: -70px;
+    margin-top: 0px;
+}
+header div div p .fas
+{
+    display: inline-block;
+    margin-right: 10px;
+    margin-left: 10px;
+    border: solid 1px #fff;
+    border-radius: 50%;
+    padding: 15px;
+	font-size: 30px;
+}
+#priceheader
+{
+	font-weight: bold;
+	font-size: 3rem;
+}
+header nav
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+header nav a
+{
+    margin-top: 30px;
+}
+/************** MAIN INDEX***********/
+
+#main h1 + p
+{
+    text-align: left;
+}
+#main h2
+{
+    font-size: 3.2rem;
+}
+
+#main #selection h3
+{
+    margin-top: 60px;
+    font-size: 2.5rem;
+}
+
+.fig
+{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.fig figure
+{
+    margin:0px;
+    flex-basis: 50%;
+}
+#main section
+{
+    margin-bottom: 30px;
+}
+/**************************** MAIN PRODUCT ************************/
+
+.flex
+{
+    display: flex;
+    flex-direction:column;
+}
+#star p i:not(:last-of-type)
+{
+    color: #FFDC0F;
+}
+#star a, form a
+{
+    color: #96b011;
+}
+form a
+{
+    display: inline-block;
+    margin-top: 20px;
+}
+form a i
+{
+    color:#E7877A 
+}
+button,input,select
+{
+    border: none;
+}
+select
+{
+    background-color:#fff;
+    border: solid 1px #cccccc;
+    padding: 8px;
+}
+input
+{  
+    text-align: center;
+    font-size: 2.4rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+#secprod article > p
+{
+    text-align: left;
+}
+#secprod article > p:nth-last-child(-n+2)
+{
+    font-weight: bold;
+}
+/************************ MAIN LISTING ************/
+
+#listing figure
+{
+	margin-top: 60px;
+}
+#listing section{
+	margin-bottom: 30px;
+}
+#listing h2,#listing h2 + p{
+	text-align: left;
+}
+#listing figure + p{
+	padding-left: 30px;
+	padding-right: 30px;
+}
+/*********************** MAIN ABOUT *******************/
+
+#about aside div 
+{
+	background-color: rgba(150, 176, 17, 0.2);
+}
+#about section div > p,#about section h2,#about section div > h3
+{
+	text-align: left
+}
+#about aside img
+{
+	width: 80px;
+	margin-top: 30px;
+}
+
+/********************** FOOTER *****************/
+
+footer
+{
+    background-color: #96B011;
+    background-image: url("../img/bg.jpg");
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    margin-top: 30px;
+}
+footer img
+{
+    width: 50px;
+}
+#assurance
+{
+    background-color:#879e0f;
+    padding-top: 30px;
+}
+#assurance i
+{
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+.flexassu nav
+{
+    flex-wrap: wrap;
+    display:flex; 
+    flex-direction: row;
+    justify-content: center; 
+}
+.flexassu nav a
+{
+    color: #cad771;
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    margin-bottom: 50px;
+}
+#liste
+{
+    background-color: #96b011;
+    padding-bottom: 50px;
+}
+#liste ul li
+{
+    list-style: none;
+    margin-bottom: 10px;
+}
+#liste a
+{
+    color: #cad771;
+}
+#liste ul
+{
+    padding: 0;
+}
+#footer
+{
+    background-color: rgba(0, 0, 0, 0.1);
+    padding-top: 30px;
+    font-size: 1.6rem;
+    line-height: 1.8;
+}
+/******************************** MEDIA *******************/
+
+@media screen and (min-width:768px)
+{
+	/*********************** HEADER ****************/
+	
+	header > img,#panier,.noel
+	{
+		display: block;
+	}
+	#panier
+	{
+		font-size: 2rem;
+		margin-top: 20px;
+	}
+	#priceheader{
+		margin-top: 15px;
+	}
+	header > img
+	{
+		width:100px;
+		position: absolute;
+		top: 0px;
+		right: 0px;
+	}
+	header div div
+	{
+		flex-direction: row;
+		justify-content:space-between;
+	}
+	header div div p
+	{
+		border: none;
+		box-shadow: none;
+		padding: 0px;
+		margin: 0px;
+		display: flex;
+	}
+	header nav
+	{
+		flex-direction: row;
+		justify-content: space-between;
+		
+	}
+	/************************ MAIN ************/
+	
+	.offre
+	{
+		width:768px;
+	}
+	/************************* ABOUT **************/
+	
+	#about h3+img
+	{
+		width: 50%;
+	}
+	#about h3 +img:nth-of-type(1){
+		float: left;
+		margin-right: 15px;
+	}
+	#about h3+img:nth-of-type(2){
+		float: right;
+		margin-left: 15px;
+		
+	}
+	/*************************** PRODUCT ************/
+	
+	#product .flexthe
+	{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+	#product .flex
+	{
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+	#product form
+	{
+		display: flex;
+		flex-direction: column;
+	}
+	#product input
+	{
+		text-align: right;
+	}
+	/************************ FOOTER *************/
+	
+	.flexassu nav{
+		flex-direction: row;
+		justify-content: space-around;
+	}
+	.flexassu nav a{
+
+		flex-basis: 15%;
+	}
+	.flexul
+	{
+		display: flex;
+		flex-direction: row;
+	}
+	.flexul ul
+	{
+		flex-basis: 33%;
+	}
+	
+}
+@media screen and (min-width:1025px)
+{
+	/*************************** MAIN ***************/
+	
+	.offre
+	{
+		width:100%;
+	}
+	#main #selection .article
+	{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+	#main .fig,
+	{
+		flex-direction: row;
+		justify-content: space-between;
+	}
+		#main .fig figure
+	{
+			flex-basis: 20%;
+	}
+	#main #selection article
+	{
+		flex-basis: 30%;
+	}
+	/********************************** ABOUT ***********/
+	
+	#about section aside div
+	{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between
+	}
+	#about section aside article
+	{
+		flex-basis: 30%;
+	}
+}
+
